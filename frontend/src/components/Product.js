@@ -8,7 +8,7 @@ export default function Product(props) {
   const { product } = props;
 
   return (
-    <Card className="product" >
+    <Card className="product">
       <Link to={`/product/${product.slug}`}>
         <img src={product.image} className="card-img-top" alt={product.name} />
       </Link>
@@ -16,7 +16,7 @@ export default function Product(props) {
         <Link to={`/product/${product.slug}`}>
           <Card.Title>{product.name}</Card.Title>
         </Link>
-        <Rating rating={product.rating} numReviews={product.numReviews}/>
+        <Rating rating={product.rating} numReviews={product.numReviews} />
         <Card.Text>
           <p>{product.price}</p>
         </Card.Text>

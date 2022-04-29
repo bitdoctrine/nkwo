@@ -18,7 +18,7 @@ const data = {
       category: 'shoes',
       image: '/images/p1.jpg',
       price: 24000,
-      countInStock: 10,
+      countInStock: 0,
       brand: 'Prada',
       rating: 5.0,
       numReviews: 10,
