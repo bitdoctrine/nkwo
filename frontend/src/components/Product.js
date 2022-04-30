@@ -20,7 +20,7 @@ export default function Product(props) {
         <Card.Text>
           <p>{product.price}</p>
         </Card.Text>
-        <Button>Add to cart</Button>
+        <Button variant="outline-primary">Add to cart</Button>
       </Card.Body>
     </Card>
   );

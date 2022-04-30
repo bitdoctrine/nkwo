@@ -1,6 +1,7 @@
 const data = {
   products: [
     {
+      _id: '1',
       name: 'Fluffy Bag',
       slug: 'fluffy-bag',
       category: 'shoes',
@@ -13,6 +14,7 @@ const data = {
       description: 'A sweet comfortable bag for you outing and all',
     },
     {
+      _id: '2',
       name: 'Boaling Boot',
       slug: 'boaling-boot',
       category: 'shoes',
@@ -25,6 +27,7 @@ const data = {
       description: 'A nice boaling boot for your comfortable boaling',
     },
     {
+      _id: '3',
       name: 'Umbrella',
       slug: 'umbrella',
       category: 'umbrellas',
@@ -37,6 +40,7 @@ const data = {
       description: 'You have never seen a better umbrella',
     },
     {
+      _id: '4',
       name: 'Adidas Fit Pant',
       slug: 'addidas-fit-pant',
       image: '/images/p4.jpg',

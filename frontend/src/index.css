@@ -36,9 +36,9 @@ main {
 }
 
 .product {
-  border: 1px solid #f6be06;
-  border-radius: 15px;
+  border: 1px solid rgb(4, 87, 255);
   margin: 1rem;
+  padding: 0.1rem;
 }
 
 .product img {
@@ -56,4 +56,8 @@ main {
 
 .img-large {
   max-width: 100%;
+}
+
+.nav-link .cart {
+  background-color: #fff;
 }
