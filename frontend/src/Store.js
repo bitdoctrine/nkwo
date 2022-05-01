@@ -8,7 +8,9 @@ export const cases = {
 
 const initialState = {
   cart: {
-    cartItems: [],
+    cartItems: localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem('cartItems'))
+      : [],
   },
 };
 
@@ -18,8 +20,8 @@ function reducer(state, action) {
       //add to cart
 
       const newItem = action.payload;
-      
-      const checkItem = state.cart.cartItems.find( 
+
+      const checkItem = state.cart.cartItems.find(
         (item) => item._id === newItem._id
       );
 
@@ -28,8 +30,17 @@ function reducer(state, action) {
             item._id === checkItem._id ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
       return { ...state, cart: { ...state.cart, cartItems } };
+
+    case cases.REMOVE: {
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item._id !== action.payload._id
+      );
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
     default:
       return state;
   }
