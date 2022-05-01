@@ -67,3 +67,7 @@ main {
   width: 80px;
   margin-right: 0.5rem;
 }
+
+.small-container {
+  max-width: 500px;
+}
