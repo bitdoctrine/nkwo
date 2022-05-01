@@ -61,3 +61,9 @@ main {
 .nav-link .cart {
   background-color: #fff;
 }
+
+.img-thumbnail {
+  height: 80px;
+  width: 80px;
+  margin-right: 0.5rem;
+}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -29,6 +29,7 @@ const reducer = (state, action) => {
 };
 
 export default function ProductScreen() {
+  const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
 
@@ -67,7 +68,11 @@ export default function ProductScreen() {
       window.alert('Sorry, Out of stock');
       return;
     }
-    ctxDispatch({ type: cases.ADD, payload: { ...product, quantity } });
+    ctxDispatch({
+      type: cases.ADD,
+      payload: { ...product, quantity },
+    });
+    navigate('/cart');
   };
 
   return loading ? (
