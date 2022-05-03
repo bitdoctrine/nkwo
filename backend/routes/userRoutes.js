@@ -7,7 +7,7 @@ import { generateToken } from '../utils.js';
 const userRouter = express.Router();
 
 userRouter.post(
-  'signin',
+  '/signin',
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
@@ -22,6 +22,7 @@ userRouter.post(
         return;
       }
     }
+    res.status(401).send({ message: 'Invalid email or password' }); 
   })
 );
 
