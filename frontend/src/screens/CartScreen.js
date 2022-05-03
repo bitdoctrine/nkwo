@@ -18,7 +18,7 @@ export default function CartScreen() {
     const { data } = await axios.get(`api/products/${item._id}`);
 
     if (data.countInStock < quantity) {
-      window.alert('Sorry, Out of stock');
+      window.alert(`Sorry Can't Sell More Than We Got`);
       return;
     }
     ctxDispatch({

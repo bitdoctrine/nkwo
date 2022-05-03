@@ -1,7 +1,23 @@
+import bcrypt from 'bcryptjs';
+
 const data = {
+  users: [
+    {
+      name: 'Friday',
+      email: 'adminbitdoctrine@gmail.com',
+      password: bcrypt.hashSync('24262426'),
+      isAdmin: true,
+    },
+    {
+      name: 'Joe',
+      email: 'bitdoctrine@gmail.com',
+      password: bcrypt.hashSync('friday.2'),
+      isAdmin: false,
+    },
+  ],
   products: [
     {
-      _id: '1',
+      // _id: '1',
       name: 'Fluffy Bag',
       slug: 'fluffy-bag',
       category: 'shoes',
@@ -14,7 +30,7 @@ const data = {
       description: 'A sweet comfortable bag for you outing and all',
     },
     {
-      _id: '2',
+      // _id: '2',
       name: 'Boaling Boot',
       slug: 'boaling-boot',
       category: 'shoes',
@@ -27,7 +43,7 @@ const data = {
       description: 'A nice boaling boot for your comfortable boaling',
     },
     {
-      _id: '3',
+      // _id: '3',
       name: 'Umbrella',
       slug: 'umbrella',
       category: 'umbrellas',
@@ -40,9 +56,10 @@ const data = {
       description: 'You have never seen a better umbrella',
     },
     {
-      _id: '4',
+      // _id: '4',
       name: 'Adidas Fit Pant',
       slug: 'addidas-fit-pant',
+      category: 'Wears',
       image: '/images/p4.jpg',
       price: 10000,
       countInStock: 15,
