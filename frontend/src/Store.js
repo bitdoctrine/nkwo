@@ -6,6 +6,7 @@ export const cases = {
   REMOVE: 'REMOVE_FROM_CART',
   SIGNIN: 'SIGNIN',
   SIGNOUT: 'SIGNOUT',
+  SAVESHIPPINADDRESS: 'SAVESHIPPINADDRESS',
 };
 
 const initialState = {
@@ -13,6 +14,9 @@ const initialState = {
     ? JSON.parse(localStorage.getItem('userInfo'))
     : null,
   cart: {
+    shippingAddress: localStorage.getItem('shippingAddress')
+      ? JSON.parse(localStorage.getItem('shippingAddress'))
+      : {},
     cartItems: localStorage.getItem('cartItems')
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
@@ -52,7 +56,20 @@ function reducer(state, action) {
       return {
         ...state,
         userInfo: null,
+        cart: {
+          cartItems: [],
+          shippingAddress: {},
+        },
       };
+    case cases.SAVESHIPPINADDRESS:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: action.payload,
+        },
+      };
+
     default:
       return state;
   }

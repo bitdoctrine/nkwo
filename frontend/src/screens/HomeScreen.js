@@ -43,7 +43,6 @@ export default function HomeScreen() {
     fetchData();
   }, []);
 
-  
   return (
     <div>
       <Helmet>
