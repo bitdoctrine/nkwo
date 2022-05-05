@@ -22,8 +22,8 @@ main {
 }
 
 .btn-primary {
-  background-color: #f6be06;
-  color: #000;
+  /* background-color: #f6be06; */
+  color: #fff;
 }
 
 .featured {

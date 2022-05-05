@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import MessageBox from '../components/MessageBox';
 import { cases, Store } from '../Store';
 
@@ -18,7 +19,7 @@ export default function CartScreen() {
     const { data } = await axios.get(`api/products/${item._id}`);
 
     if (data.countInStock < quantity) {
-      window.alert(`Sorry Can't Sell More Than We Got`);
+      toast.error(`Sorry Can't Sell More Than We Got`);
       return;
     }
     ctxDispatch({

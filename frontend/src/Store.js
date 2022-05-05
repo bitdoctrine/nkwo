@@ -7,6 +7,7 @@ export const cases = {
   SIGNIN: 'SIGNIN',
   SIGNOUT: 'SIGNOUT',
   SAVESHIPPINADDRESS: 'SAVESHIPPINADDRESS',
+  SIGNUP: 'SIGNUP',
 };
 
 const initialState = {
