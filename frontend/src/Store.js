@@ -7,6 +7,7 @@ export const cases = {
   SIGNIN: 'SIGNIN',
   SIGNOUT: 'SIGNOUT',
   SAVESHIPPINADDRESS: 'SAVESHIPPINADDRESS',
+  SAVEPAYMENTMETHOD: 'SAVEPAYMENTMETHOD',
   SIGNUP: 'SIGNUP',
 };
 
@@ -18,6 +19,9 @@ const initialState = {
     shippingAddress: localStorage.getItem('shippingAddress')
       ? JSON.parse(localStorage.getItem('shippingAddress'))
       : {},
+    paymentMethod: localStorage.getItem('paymentMethod')
+      ? localStorage.getItem('paymentMethod')
+      : '',
     cartItems: localStorage.getItem('cartItems')
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
@@ -60,6 +64,7 @@ function reducer(state, action) {
         cart: {
           cartItems: [],
           shippingAddress: {},
+          paymentMethod: '',
         },
       };
     case cases.SAVESHIPPINADDRESS:
@@ -68,6 +73,14 @@ function reducer(state, action) {
         cart: {
           ...state.cart,
           shippingAddress: action.payload,
+        },
+      };
+    case cases.SAVEPAYMENTMETHOD:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          paymentMethod: action.payload,
         },
       };
 
