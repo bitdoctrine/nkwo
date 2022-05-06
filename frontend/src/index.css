@@ -17,6 +17,10 @@ header a {
   text-decoration: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 main {
   flex: 1;
 }

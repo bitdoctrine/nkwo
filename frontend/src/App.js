@@ -16,16 +16,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import ShippingScreen from './screens/ShippingScreen';
 import Singup from './screens/Singup';
 import PaymentMethod from './screens/PaymentMethod';
+import Order from './screens/Order';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
-
   const { cart, userInfo } = state;
 
   const signout = () => {
     ctxDispatch({ type: cases.SIGNOUT });
     localStorage.removeItem('userInfo');
-    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('shippingInfo');
     localStorage.removeItem('paymentMethod');
   };
   return (
@@ -57,11 +57,7 @@ function App() {
                       <NavDropdown.Item>Previous Orders</NavDropdown.Item>
                     </LinkContainer>
                     <Dropdown.Divider />
-                    <Link
-                      to="#signout"
-                      className="dropdown-item"
-                      onClick={signout}
-                    >
+                    <Link to="/" className="dropdown-item" onClick={signout}>
                       Logout
                     </Link>
                   </NavDropdown>
@@ -84,6 +80,7 @@ function App() {
               <Route path="/shipping" element={<ShippingScreen />} />
               <Route path="/signup" element={<Singup />} />
               <Route path="/payment" element={<PaymentMethod />} />
+              <Route path="/completeOrder" element={<Order />} />
             </Routes>
           </Container>
         </main>
