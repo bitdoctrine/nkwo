@@ -25,7 +25,7 @@ function PaymentMethod() {
     e.preventDefault();
     ctxDispatch({ type: cases.SAVEPAYMENTMETHOD, payload: paymentMethodName });
     localStorage.setItem('paymentMethod', paymentMethodName);
-    navigate('/completeOrder');
+    navigate('/order');
   };
   return (
     <div>
@@ -61,7 +61,7 @@ function PaymentMethod() {
           </div>
         </Form>
       </Container>
-    </div>
+    </div> 
   );
 }
 
