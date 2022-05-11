@@ -9,6 +9,7 @@ export const cases = {
   SAVESHIPPINADDRESS: 'SAVESHIPPINADDRESS',
   SAVEPAYMENTMETHOD: 'SAVEPAYMENTMETHOD',
   SIGNUP: 'SIGNUP',
+  CLEAR_CART: 'CLEAR_CART',
 };
 
 const initialState = {
@@ -55,6 +56,9 @@ function reducer(state, action) {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+
+    case cases.CLEAR_CART:
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     case cases.SIGNIN:
       return { ...state, userInfo: action.payload };
     case cases.SIGNOUT:

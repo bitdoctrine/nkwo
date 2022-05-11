@@ -1,12 +1,42 @@
-import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useReducer } from 'react';
 import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Checkout from '../components/Checkout';
-import { Store } from '../Store';
+import LoadingBox from '../components/LoadingBox';
+import { cases, Store } from '../Store';
+import { getError } from '../util';
+
+const localCases = {
+  CREATE: 'CREATE_REQUEST',
+  CREATE_SUCCESS: 'CREATE_SUCCES',
+  CREATE_FAILED: 'CREATE_FAILED',
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case localCases.CREATE:
+      return { ...state, loading: true };
+    case localCases.CREATE_SUCCESS:
+      return { ...state, loading: false };
+
+    case localCases.CREATE_FAILED:
+      return { ...state, loading: false };
+
+    default:
+      return state;
+  }
+};
 
 export default function Order() {
   const navigate = useNavigate();
+
+  const [{ loading, error }, dispatch] = useReducer(
+    (reducer, { loading: false, error: '' })
+  );
+
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
   const {
@@ -16,6 +46,7 @@ export default function Order() {
     ItemsPrice,
     totalPrice,
     paymentMethod,
+    shippingAddress,
   } = cart;
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
@@ -28,7 +59,37 @@ export default function Order() {
   cart.totalPrice = ItemsPrice + ShippingPrice + taxPrice;
 
   //Place Order
-  const placeOrder = async (e) => {};
+  const placeOrder = async (e) => {
+    try {
+      dispatch({ type: localCases.CREATE });
+
+      const { data } = await axios.post(
+        '/api/order',
+        {
+          orderItems: cartItems,
+          shippingAddress: shippingAddress,
+          paymentMethod: paymentMethod,
+          ItemsPrice: ItemsPrice,
+          ShippingPrice: ShippingPrice,
+          taxPrice: taxPrice,
+          totalPrice: totalPrice,
+        },
+        {
+          headers: {
+            authorization: `Bearer${userInfo.token}`,
+          },
+        }
+      );
+
+      ctxDispatch({ type: cases.CLEAR_CART });
+      dispatch({ type: localCases.CREATE_SUCCESS });
+      localStorage.removeItem('cartItems');
+      navigate(`/orders/${data.order._id}`);
+    } catch (err) {
+      dispatch({ type: localCases.CREATE_FAILED });
+      toast.error(getError(err));
+    }
+  };
 
   useEffect(() => {
     if (!paymentMethod) {
@@ -153,6 +214,7 @@ export default function Order() {
                       Order
                     </Button>
                   </div>
+                  {loading && <LoadingBox></LoadingBox>}
                 </ListGroup.Item>
               </ListGroup>
             </Card.Body>
