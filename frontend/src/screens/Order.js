@@ -9,20 +9,20 @@ import LoadingBox from '../components/LoadingBox';
 import { cases, Store } from '../Store';
 import { getError } from '../util';
 
-const localCases = {
-  CREATE: 'CREATE_REQUEST',
-  CREATE_SUCCESS: 'CREATE_SUCCES',
-  CREATE_FAILED: 'CREATE_FAILED',
-};
+// const localCases = {
+//   CREATE: 'CREATE_REQUEST',
+//   CREATE_SUCCESS: 'CREATE_SUCCES',
+//   CREATE_FAILED: 'CREATE_FAILED',
+// };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case localCases.CREATE:
+    case 'CREATE':
       return { ...state, loading: true };
-    case localCases.CREATE_SUCCESS:
+    case 'CREATE_SUCCESS':
       return { ...state, loading: false };
 
-    case localCases.CREATE_FAILED:
+    case 'CREATE_FAILED':
       return { ...state, loading: false };
 
     default:
@@ -33,9 +33,7 @@ const reducer = (state, action) => {
 export default function Order() {
   const navigate = useNavigate();
 
-  const [{ loading, error }, dispatch] = useReducer(
-    (reducer, { loading: false, error: '' })
-  );
+  const [{ loading }, dispatch] = useReducer(reducer, { loading: false });
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -61,10 +59,10 @@ export default function Order() {
   //Place Order
   const placeOrder = async (e) => {
     try {
-      dispatch({ type: localCases.CREATE });
+      dispatch({ type: 'CREATE' });
 
       const { data } = await axios.post(
-        '/api/order',
+        '/api/orders',
         {
           orderItems: cartItems,
           shippingAddress: shippingAddress,
@@ -76,17 +74,17 @@ export default function Order() {
         },
         {
           headers: {
-            authorization: `Bearer${userInfo.token}`,
+            authorization: `Bearer ${userInfo.token}`,
           },
         }
       );
 
       ctxDispatch({ type: cases.CLEAR_CART });
-      dispatch({ type: localCases.CREATE_SUCCESS });
+      dispatch({ type: 'CREATE_SUCCESS' });
       localStorage.removeItem('cartItems');
       navigate(`/orders/${data.order._id}`);
     } catch (err) {
-      dispatch({ type: localCases.CREATE_FAILED });
+      dispatch({ type: 'CREATE_FAILED' });
       toast.error(getError(err));
     }
   };
