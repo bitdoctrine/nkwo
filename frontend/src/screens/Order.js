@@ -37,24 +37,22 @@ export default function Order() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
-  const {
+  let {
     cartItems,
-    ShippingPrice,
+    shippingPrice,
     taxPrice,
-    ItemsPrice,
+    itemsPrice,
     totalPrice,
     paymentMethod,
     shippingAddress,
   } = cart;
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
-  cart.ItemsPrice = round2(
-    cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
-  );
+  itemsPrice = round2(cartItems.reduce((a, c) => a + c.quantity * c.price, 0));
 
-  cart.ShippingPrice = cart.ItemsPrice < 100 ? round2(0) : round2(10);
-  cart.taxPrice = round2(0.05 * ItemsPrice);
-  cart.totalPrice = ItemsPrice + ShippingPrice + taxPrice;
+  shippingPrice = cart.itemsPrice < 100 ? round2(0) : round2(10);
+  taxPrice = round2(0.05 * itemsPrice);
+  totalPrice = itemsPrice + shippingPrice + taxPrice;
 
   //Place Order
   const placeOrder = async (e) => {
@@ -67,8 +65,8 @@ export default function Order() {
           orderItems: cartItems,
           shippingAddress: shippingAddress,
           paymentMethod: paymentMethod,
-          ItemsPrice: ItemsPrice,
-          ShippingPrice: ShippingPrice,
+          itemsPrice: itemsPrice,
+          shippingPrice: shippingPrice,
           taxPrice: taxPrice,
           totalPrice: totalPrice,
         },
@@ -82,7 +80,7 @@ export default function Order() {
       ctxDispatch({ type: cases.CLEAR_CART });
       dispatch({ type: 'CREATE_SUCCESS' });
       localStorage.removeItem('cartItems');
-      navigate(`/orders/${data.order._id}`);
+      navigate(`/order/${data.order._id}`);
     } catch (err) {
       dispatch({ type: 'CREATE_FAILED' });
       toast.error(getError(err));
@@ -138,7 +136,7 @@ export default function Order() {
               <Card.Title>Cart Items</Card.Title>
               <ListGroup>
                 {cartItems.map((item) => (
-                  <ListGroup.Item className="my-3">
+                  <ListGroup.Item key={item._id} className="my-3">
                     <Row className="align-items-center">
                       <Col md={6} className="my-2">
                         <img
@@ -181,13 +179,13 @@ export default function Order() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>#{ItemsPrice.toFixed(2)}</Col>
+                    <Col>#{itemsPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>#{ShippingPrice.toFixed(2)}</Col>
+                    <Col>#{shippingPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>

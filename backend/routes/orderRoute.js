@@ -16,8 +16,8 @@ orderRouter.post(
       })),
       shippingAddress: req.body.shippingAddress,
       paymentMethod: req.body.paymentMethod,
-      itemsPrice: req.body.ItemsPrice,
-      shippingPrice: req.body.ShippingPrice,
+      itemsPrice: req.body.itemsPrice,
+      shippingPrice: req.body.shippingPrice,
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
       user: req.user._id,
@@ -27,4 +27,16 @@ orderRouter.post(
   })
 );
 
+orderRouter.get(
+  '/:id',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      res.send(order);
+    } else {
+      res.status(401).send({ message: 'No Such Order Exists' });
+    }
+  })
+);
 export default orderRouter;
