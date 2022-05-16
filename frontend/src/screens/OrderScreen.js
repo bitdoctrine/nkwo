@@ -191,7 +191,7 @@ export default function OrderScreen() {
                           alt={orderItem.name}
                           className="img-fluid rounded img-thumbnail"
                         ></img>{' '}
-                        <Link to={`/products/${orderItem.slug}`}>
+                        <Link to={`/product/${orderItem.slug}`}>
                           {orderItem.name}
                         </Link>
                       </Col>
