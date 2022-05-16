@@ -13,6 +13,10 @@
   },
   "author": "Friday Okorie",
   "license": "MIT",
+  "engines": {
+    "node": "16.14.2"
+  },
+
   "bugs": {
     "url": "https://github.com/bitdoctrine/nkwo/issues"
   },
