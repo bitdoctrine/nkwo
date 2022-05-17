@@ -4,6 +4,9 @@
   "description": "Affordable shopping for all",
   "main": "backend/server.js",
   "scripts": {
+    "build": "cd frontend && npm run build",
+    "install-client": "cd frontend && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build ",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,7 +19,6 @@
   "engines": {
     "node": "16.14.2"
   },
-
   "bugs": {
     "url": "https://github.com/bitdoctrine/nkwo/issues"
   },
