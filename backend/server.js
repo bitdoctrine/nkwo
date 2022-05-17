@@ -20,6 +20,10 @@ mongoose
     console.log(err.message);
   });
 
+app.get('/', (req, res) => {
+  res.send('Express says Hello?');
+});
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
