@@ -97,7 +97,9 @@ export default function UserProfile() {
           />
         </Form.Group>
         <div className="my-2">
-          <Button type="submit">Save Changes</Button>
+          <Button type="submit">
+            {updating ? 'Saving Changes' : 'Save Changes'}
+          </Button>
         </div>
       </form>
     </div>
