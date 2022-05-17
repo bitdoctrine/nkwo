@@ -20,13 +20,13 @@ mongoose
     console.log(err.message);
   });
 
-app.get('/', (req, res) => {
-  res.send('Express says Hello?');
-});
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.get('/', (req, res) => {
+  res.send('Express says Hello?');
+});
 
 app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
