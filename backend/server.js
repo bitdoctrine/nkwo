@@ -37,9 +37,6 @@ app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../frontend/build'));
-}
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
