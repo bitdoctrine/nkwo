@@ -27,6 +27,9 @@ orderRouter.post(
   })
 );
 
+orderRouter.get('/test', (req, res) => {
+  res.send('This seems to be working');
+});
 orderRouter.get(
   '/mine',
   isAuth,

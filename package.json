@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "nkwo",
   "version": "1.0.0",
   "description": "Affordable shopping for all",
@@ -23,4 +24,30 @@
     "url": "https://github.com/bitdoctrine/nkwo/issues"
   },
   "homepage": "https://github.com/bitdoctrine/nkwo#readme"
+=======
+  "name": "backend",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": "16.14.2",
+    "npm": "8.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.1",
+    "nodemon": "^2.0.16"
+  }
+>>>>>>> 3639e107b8ca9995d69db42f0fe50eb0be401f6b
 }
